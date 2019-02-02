@@ -38,6 +38,9 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
+  .card {
+    padding: 5px;
+  }
     </style>
 </head>
 
@@ -73,7 +76,7 @@
           </div>
 
           <video style="margin-top: 70px;" id="video" width="640" controls autoplay></video>
-
+          <!--
           <div style="text-align: center">
             <form>
               <select id="selVideo">
@@ -91,8 +94,42 @@
               <input type="button" value="load video" class="btn btn-secondary" onclick="loadvideo()">
             </form>
           </div>
+          -->
+       <div class="row" style="margin-left: 325px; margin-top: 150px">   
+         
+          <div class="card .col-sm-3" style="width: 18rem; margin: 10px; margin-left: 50px">
+            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title" id="title-name1">Star Trek: Angel One</h5>
+              <a href="#" class="btn btn-primary" onclick="loadvideo('title-name1')">Load Video</a>
+            </div>
+          </div>
+          <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
+            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title" id="title-name2">Sintel</h5>
+              <a href="#" class="btn btn-primary" onclick="loadvideo('title-name2')">Load Video</a>
+            </div>
+          </div>
 
-          </table>
+          <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
+            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title" id="title-name3">Helio Centrism</h5>
+              <a href="#" class="btn btn-primary" onclick="loadvideo('title-name3')">Load Video</a>
+            </div>
+          </div>
+
+          <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
+            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title" id="title-name4">Tears of Steel</h5>
+              <a href="#" class="btn btn-primary" onclick="loadvideo('title-name4')">Load Video</a>
+            </div>
+          </div>
+        
+      </div> 
+
           <table class="table" id="table" style="width:640px; text-align: center; visibility: hidden; margin-left: 595px;
       margin-top: 50px; background-color: rgb(168, 162, 162);">
             <thead>
@@ -108,9 +145,52 @@
             </tbody>
           </table>
         </div>
-      </div>
+      </div> 
+    </div>
+  </div>  
+  </div>
+  
+</body>
+
+
+      <video style="margin-top: 70px;" id="video"
+            width="640"
+            controls preload="metadata" autoplay>
+      </video>
+      
+      <div style="text-align: center">
+        <form>
+          <select id="selVideo">
+            <option>Star Trek: Angel One</option>
+          
+          
+            <option>Sintel</option>
+          
+          
+            <option>Helio Centrism</option>
+          
+         
+            <option>Tears of Steel</option>
+          </select>
+          <input type="button" value="load video" class="btn btn-secondary" onclick="loadvideo()">
+        </form>
+      </div>      
+
+      <table class="table" id="content-table" style="width:640px; text-align: center; margin-left: 595px;
+      margin-top: 50px; color: indianred; background-color: white;"></table>
+    </div>
     </div>
   </div>
+</div>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('/sw.js')
+      .then(function () { console.log("Service Worker Registered"); });
+  }
+</script>
 </body>
+
 
 </html>

@@ -28,10 +28,11 @@ function initApp() {
 }
 
 
-function loadvideo(){
+function loadvideo(videoId){
   // load correct manifesturi to player
-  var selVideo = document.getElementById("selVideo");
-  var video1 = selVideo.value;
+  //var selVideo = document.getElementById("selVideo");
+  var selVideo = document.getElementById(videoId);
+  var video1 = selVideo.innerHTML;
  
 
   asset_name = video1;
