@@ -118,6 +118,8 @@ function initPlayer() {
   // Update the content list to show what items we initially have
   // stored offline.
   refreshContentList();
+
+
 }
 
 function textDisplay(video){
