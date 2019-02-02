@@ -454,6 +454,8 @@ function setDownloadProgress(content, progress) {
  */
 function refreshContentList() {
   var contentTable = window.document.getElementById('content-table');
+  var table = window.document.getElementById('table').style.visibility = "visible";
+  var contentTableHead = window.document.getElementById('content-tablehead').style.visibility = "visible";
 
   // Clear old rows from the table.
   while (contentTable.rows.length) {
@@ -462,9 +464,11 @@ function refreshContentList() {
 
   var addRow = function(content) {
     var append = -1;
-
+    var serialNumber;
     var row = contentTable.insertRow(append);
-    row.insertCell(append).innerHTML = content.offlineUri;
+    //row.insertCell(append).innerHTML = content.offlineUri;
+    serialNumber = contentTable.rows.length;
+    row.insertCell(append).innerHTML = serialNumber;
     Object.keys(content.appMetadata)
         .map(function(key) {
           return content.appMetadata[key];

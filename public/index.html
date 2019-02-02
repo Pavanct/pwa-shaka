@@ -20,7 +20,7 @@
       }
       body, html {
     height: 100%;
-    overflow: hidden;
+    overflow: visible;
   }
   
   .bg { 
@@ -86,10 +86,23 @@
           </select>
           <input type="button" value="load video" class="btn btn-secondary" onclick="loadvideo()">
         </form>
-      </div>      
+      </div>
 
-      <table id="content-table" style="width:640px; text-align: center; margin-left: 595px;
-      margin-top: 50px; color: indianred; background-color: white;"></table>
+     </table> 
+      <table class="table" id="table" style="width:640px; text-align: center; visibility: hidden; margin-left: 595px;
+      margin-top: 50px; background-color: rgb(168, 162, 162);">
+      <thead id=content-tablehead style="visibility: hidden">
+          <tr>
+            <th scope="col">Sl no</th>
+            <th scope="col">Title</th>
+            <th scope="col">Date and TIme</th>
+            <th scope="col">Play</th>
+            <th scope="col">Remove</th>
+          </tr>
+        </thead>
+        <tbody id="content-table">
+        </tbody>
+     </table>
     </div>
     </div>
   </div>
