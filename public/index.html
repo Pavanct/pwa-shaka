@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <!-- Shaka Player compiled library: -->
-    <script src="shaka-player.compiled.js"></script>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/2.4.6/shaka-player.compiled.js"></script>-->
-    <!-- Your application source: -->
-    <script src="myapp.js"></script>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+
+  <!-- Shaka Player compiled library: -->
+  <script src="shaka-player.compiled.js"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/2.4.6/shaka-player.compiled.js"></script>-->
+  <!-- Your application source: -->
+  <script src="myapp.js"></script>
 
 
-    <style>
-      table, th, td {
+  <style>
+    table, th, td {
         border: 1px solid black;
       }
       body, html {
@@ -36,31 +39,82 @@
     background-size: cover;
   }
     </style>
-  </head>
-  <body>
-    <div class="bg .container">
-      <div class="row">
+</head>
+
+<body>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <div class="bg .container">
+    <div class="row">
       <div class="col-md-12">
-      <div style="text-align: center">
-      
-      
-    <div id='online-signal' style='text-align:center'></div>
-    <div style="color: indianred">
-      <div style="background-color: white; ">
-        <span style="width:120px;display:inline-block">Asset Name</span>
-        <input id="asset-title-input" type="text" style="width:500px" value="Star Trek: Angel One">
-      </div>
-      <div style="background-color: white;">
-        <span style="width:120px;display:inline-block">Asset Manifest</span>
-        <input id="asset-uri-input" type="text" style="width:500px" value="//storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd">
+        <div style="text-align: center">
+
+
+<<<<<<< HEAD
+          <div id='online-signal' style='text-align:center'></div>
+          <div style="color: indianred">
+            <div style="background-color: white; ">
+              <span style="width:120px;display:inline-block">Asset Name</span>
+              <input id="asset-title-input" type="text" style="width:500px" value="Star Trek: Angel One">
+            </div>
+            <div style="background-color: white;">
+              <span style="width:120px;display:inline-block">Asset Manifest</span>
+              <input id="asset-uri-input" type="text" style="width:500px" value="//storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd">
+            </div>
+          </div>
+
+          <div>
+            <span><progress id="progress-bar" value="0" max="100"></span>
+            <span><button id="download-button" class="btn btn-secondary btn-sm" type="button">Download</button></span>
+          </div>
+
+          <video style="margin-top: 70px;" id="video" width="640" controls autoplay></video>
+
+          <div style="text-align: center">
+            <form>
+              <select id="selVideo">
+                <option>Star Trek: Angel One</option>
+
+
+                <option>Sintel</option>
+
+
+                <option>Helio Centrism</option>
+
+
+                <option>Tears of Steel</option>
+              </select>
+              <input type="button" value="load video" class="btn btn-secondary" onclick="loadvideo()">
+            </form>
+          </div>
+
+          </table>
+          <table class="table" id="table" style="width:640px; text-align: center; visibility: hidden; margin-left: 595px;
+      margin-top: 50px; background-color: rgb(168, 162, 162);">
+            <thead>
+              <tr>
+                <th scope="col">Sl no</th>
+                <th scope="col">Title</th>
+                <th scope="col">Date and TIme</th>
+                <th scope="col">Play</th>
+                <th scope="col">Remove</th>
+              </tr>
+            </thead>
+            <tbody id="content-table">
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
+  </div>
+</body>
 
-      <div>
-        <span><progress id="progress-bar" value="0" max="100"></span>
-        <span><button id="download-button" class="btn btn-secondary btn-sm" type="button">Download</button></span>
-      </div>
-
+=======
       <video style="margin-top: 70px;" id="video"
             width="640"
             controls preload="metadata" autoplay>
@@ -98,4 +152,5 @@
   }
   </script>
   </body>
+>>>>>>> 6484887d7e7b400df251c1e226de7c70b1f0026f
 </html>
