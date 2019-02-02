@@ -454,8 +454,7 @@ function setDownloadProgress(content, progress) {
  */
 function refreshContentList() {
   var contentTable = window.document.getElementById('content-table');
-  var table = window.document.getElementById('table').style.visibility = "visible";
-  var contentTableHead = window.document.getElementById('content-tablehead').style.visibility = "visible";
+  //window.document.getElementById('table').style.visibility = "visible";
 
   // Clear old rows from the table.
   while (contentTable.rows.length) {
@@ -463,6 +462,11 @@ function refreshContentList() {
   }
 
   var addRow = function(content) {
+    
+    window.document.getElementById('table').style.visibility = "visible";
+    /*if (contentTable.rows.length == 0) {
+      window.document.getElementById('table').style.visibility = "hidden";
+    }*/
     var append = -1;
     var serialNumber;
     var row = contentTable.insertRow(append);
@@ -485,7 +489,11 @@ function refreshContentList() {
         'REMOVE',
         function() {
           removeContent(content)
-              .then(function() { refreshContentList() });
+              .then(function() { refreshContentList();
+                if (contentTable.rows.length == 0) {
+      window.document.getElementById('table').style.visibility = "hidden";
+    }
+               });
         }));
   };
 
