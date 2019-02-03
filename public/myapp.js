@@ -28,12 +28,14 @@ function initApp() {
 }
 
 
-function loadvideo(videoId){
+function loadvideo(videoId){+
+  console.log(videoId);
   // load correct manifesturi to player
   //var selVideo = document.getElementById("selVideo");
   var selVideo = document.getElementById(videoId);
   var video1 = selVideo.innerHTML;
- 
+  var title_name = document.getElementById("video_name");
+
 
   asset_name = video1;
   asset_manifest = manifestUri;
@@ -41,17 +43,22 @@ function loadvideo(videoId){
   console.log(video1);
   if(video1 == "Star Trek: Angel One"){
     manifestUri = url1;
+    console.log(video1);
+    title_name.innerHTML = video1;
     console.log(manifestUri);
   } else if(video1 == "Sintel"){
     manifestUri = url2;
+   title_name.innerHTML = video1;
     console.log(manifestUri);
 
   }else if(video1 == "Helio Centrism"){
     manifestUri = url3;
+   title_name.innerHTML = video1;
     console.log(manifestUri);
 
   }else if(video1 == "Tears of Steel"){
     manifestUri = url4;
+    title_name.innerHTML = video1;
     console.log(manifestUri);
 
   }

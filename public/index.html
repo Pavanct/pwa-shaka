@@ -25,7 +25,7 @@
     overflow: visible;
   }
   
-  .bg { 
+  body { 
     /* The image used */
 
     background-image: url("bg1.jpg");
@@ -34,9 +34,9 @@
     height: 100%; 
   
     /* Center and scale the image nicely */
-    background-position: center;
+    background-position: center; 
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: auto;
   }
   .card {
     padding: 5px;
@@ -53,29 +53,71 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
   <div class="bg .container">
-    <div class="row">
-      <div class="col-md-12">
-        <div style="text-align: center">
+    <div class="col-md-12">
+      
+        <div style="text-align: left">
 
 
-          <div id='online-signal' style='text-align:center'></div>
-          <div style="color: indianred">
-            <div style="background-color: white; ">
-              <span style="width:120px;display:inline-block">Asset Name</span>
-              <input id="asset-title-input" type="text" style="width:500px" value="Star Trek: Angel One">
+       <div class="container">   
+        <div class="video_container row" style="margin-left: 50px">
+
+         <div class="col-md-8" style="margin-left: -250px">
+          <video style="margin-top: 70px;" id="video" width="720" controls autoplay></video>
+          <h2 id="video_name" style="color: blanchedalmond; margin-left: 20px">Star Trek: Angel One</h2>
+        </div>
+        <div class="col-md-4" 
+           style="margin-top: 50px; margin-left: 150px">   
+         
+            <div class="card .col-sm-3" style="width: 18rem; margin: 10px;">
+              <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title" id="title-name1">Star Trek: Angel One</h5>
+                <a href="#" class="btn btn-primary" onclick="loadvideo('title-name1')">Load Video</a>
+              </div>
             </div>
-            <div style="background-color: white;">
+            <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
+              <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title" id="title-name2">Sintel</h5>
+                <a href="#" class="btn btn-primary" onclick="loadvideo('title-name2')">Load Video</a>
+              </div>
+            </div>
+  
+            <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
+              <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title" id="title-name3">Helio Centrism</h5>
+                <a href="#" class="btn btn-primary" onclick="loadvideo('title-name3')">Load Video</a>
+              </div>
+            </div>
+  
+            <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
+              <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title" id="title-name4">Tears of Steel</h5>
+                <a href="#" class="btn btn-primary" onclick="loadvideo('title-name4')">Load Video</a>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+          
+          <div style="color: black; margin-top: 50px">
+            <div style="background-color: #89909173; color: white; width: fit-content;  visibility: hidden">
+              <span style="width:120px;display:inline-block">Asset Name</span>
+              <input id="asset-title-input" type="text" style="width:500px; background-color: #89909173;" value="Star Trek: Angel One">
+            </div>
+            <div style="background-color: #89909173; color: white;width: fit-content; visibility: hidden">
               <span style="width:120px;display:inline-block">Asset Manifest</span>
-              <input id="asset-uri-input" type="text" style="width:500px" value="//storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd">
+              <input id="asset-uri-input" type="text" style="width:800px; background-color: #89909173; " value="//storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd">
             </div>
           </div>
-
-          <div>
-            <span><progress id="progress-bar" value="0" max="100"></span>
+          <div style="margin-top: -100px; margin-left: -165px">
+            <span><progress id="progress-bar" value="0" max="100" style="width: 620px"></span>
             <span><button id="download-button" class="btn btn-secondary btn-sm" type="button">Download</button></span>
           </div>
-
-          <video style="margin-top: 70px;" id="video" width="640" controls autoplay></video>
+        </div> 
+      </div>
           <!--
           <div style="text-align: center">
             <form>
@@ -95,41 +137,9 @@
             </form>
           </div>
           -->
-       <div class="row" style="margin-left: 325px; margin-top: 150px">   
-         
-          <div class="card .col-sm-3" style="width: 18rem; margin: 10px; margin-left: 50px">
-            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title" id="title-name1">Star Trek: Angel One</h5>
-              <a href="#" class="btn btn-primary" onclick="loadvideo('title-name1')">Load Video</a>
-            </div>
-          </div>
-          <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
-            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title" id="title-name2">Sintel</h5>
-              <a href="#" class="btn btn-primary" onclick="loadvideo('title-name2')">Load Video</a>
-            </div>
-          </div>
-
-          <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
-            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title" id="title-name3">Helio Centrism</h5>
-              <a href="#" class="btn btn-primary" onclick="loadvideo('title-name3')">Load Video</a>
-            </div>
-          </div>
-
-          <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
-            <img class="card-img-top" src=".../100px180/" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title" id="title-name4">Tears of Steel</h5>
-              <a href="#" class="btn btn-primary" onclick="loadvideo('title-name4')">Load Video</a>
-            </div>
-          </div>
         
-      </div> 
-
+     <!--<div id='online-signal' style='text-align:center'></div>--> 
+    
           <table class="table" id="table" style="width:640px; text-align: center; visibility: hidden; margin-left: 595px;
       margin-top: 50px; background-color: rgb(168, 162, 162);">
             <thead>
@@ -144,44 +154,17 @@
             <tbody id="content-table">
             </tbody>
           </table>
-        </div>
+        
       </div> 
     </div>
   </div>  
   </div>
-  
+
 </body>
 
 
-      <video style="margin-top: 70px;" id="video"
-            width="640"
-            controls preload="metadata" autoplay>
-      </video>
       
-      <div style="text-align: center">
-        <form>
-          <select id="selVideo">
-            <option>Star Trek: Angel One</option>
-          
-          
-            <option>Sintel</option>
-          
-          
-            <option>Helio Centrism</option>
-          
-         
-            <option>Tears of Steel</option>
-          </select>
-          <input type="button" value="load video" class="btn btn-secondary" onclick="loadvideo()">
-        </form>
-      </div>      
-
-      <table class="table" id="content-table" style="width:640px; text-align: center; margin-left: 595px;
-      margin-top: 50px; color: indianred; background-color: white;"></table>
-    </div>
-    </div>
-  </div>
-</div>
+  
 
 <script>
   if ('serviceWorker' in navigator) {
