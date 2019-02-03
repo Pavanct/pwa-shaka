@@ -36,6 +36,7 @@ function loadvideo(videoId){
   var video1 = selVideo.innerHTML;
   var title_name = document.getElementById("video_name");
 
+ 
 
   asset_name = video1;
   asset_manifest = manifestUri;
