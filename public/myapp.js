@@ -28,7 +28,7 @@ function initApp() {
 }
 
 
-function loadvideo(videoId){+
+function loadvideo(videoId){
   console.log(videoId);
   // load correct manifesturi to player
   //var selVideo = document.getElementById("selVideo");
@@ -64,11 +64,23 @@ function loadvideo(videoId){+
   }
   player.load(manifestUri).then(function() {
     // This runs if the asynchronous load is successful.
+   
+    texTracks = player.getTextTracks();
+    console.log("text tracks 11111");
+    //console.log(JSON.stringify(texTracks[1]));
+    var subtitles = document.getElementById("subtitle");
+    //subtitles.src = texTracks[1];
     console.log('The video has now been loaded!');
+    setTextTrack(texTracks, player);
+
   }).catch(onError); 
-
-  initStorage(player);
-
+  //texTracks = console.log(player.getTextTracks());
+  //Player = player;
+  //console.log(textTracks);
+ /* player.configure(
+    "textDisplayFactory", new shaka.text.SimpleTextDisplayer(video));
+  initStorage(player); */
+  
   var downloadButton = window.window.document.getElementById('download-button');
   downloadButton.onclick = onDownloadClick;
 
@@ -83,19 +95,16 @@ function loadvideo(videoId){+
   refreshContentList();
 }
 
+
+
 function initPlayer() {
   // Create a Player instance.
   var video = window.document.getElementById('video');
   var player = new shaka.Player(video);
 
-  /*player.configure("AbrConfiguration", true, "textDisplayFactory", 
-  new SimpleTextDisplayer(video) // Or whatever you called the new class.
-  );*/
-
-  player.configure({
-    textDisplayFactory: new shaka.text.SimpleTextDisplayer(video),
-    AbrConfiguration: true
-  });
+  player.configure("textDisplayFactory", new shaka.text.SimpleTextDisplayer(video));
+  
+  
  // var estimator = new shaka.util.EWMABandwidthEstimator();
  // var source = new shaka.Player.DashVideoSource(manifestUri, null, estimator);
 
@@ -127,6 +136,36 @@ function initPlayer() {
   // stored offline.
   refreshContentList();
 }
+
+/*myTextDisplayer = function(video){
+  console.log("text displayer is called");
+  console.log(video);
+  //console.log(textTracks);
+  this.textTrack_ = null;
+  //text_Tracks = Player.getTextTracks();
+ // console.log(text_Tracks);
+  // TODO: Test that in all cases, the built-in CC controls in the video element
+  // are toggling our TextTrack.
+  // If the video element has TextTracks, disable them.  If we see one that
+  // was created by a previous instance of Shaka Player, reuse it.
+  for (let i = 0; i < video.textTracks.length; ++i) {
+    let track = video.textTracks[i];
+    track.mode = 'disabled';
+    if (track.label == shaka.text.SimpleTextDisplayer.TextTrackLabel_) {
+      this.textTrack_ = track;
+    }
+  }
+  if (!this.textTrack_) {
+    // As far as I can tell, there is no observable difference between setting
+    // kind to 'subtitles' or 'captions' when creating the TextTrack object.
+    // The individual text tracks from the manifest will still have their own
+    // kinds which can be displayed in the app's UI.
+    this.textTrack_ = video.addTextTrack(
+        'subtitles', shaka.text.SimpleTextDisplayer.TextTrackLabel_);
+  }
+  //this.textTrack_.mode = 'hidden';
+  console.log(video.textTracks);
+} */
 
 function onErrorEvent(event) {
   // Extract the shaka.util.Error object from the event.
@@ -307,3 +346,15 @@ function createButton(text, action) {
 }
 
 window.document.addEventListener('DOMContentLoaded', initApp);
+
+
+function setTextTrack(textTracks, player){
+  var on = true;
+  console.log(textTracks);
+  console.log(textTracks[1]);
+  player.setTextTrackVisibility(on);
+ // player.selectTextLanguage("en");
+  player.selectTextTrack(textTracks[1]);
+  console.log(player.isTextTrackVisible());
+  
+}
