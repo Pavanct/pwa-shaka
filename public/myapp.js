@@ -88,11 +88,11 @@ function loadvideo(videoId){
   //var downloadButton = window.window.document.getElementById('download-button');
   //downloadButton.onclick = onDownloadClick;
 
-  var asset_name1 = document.getElementById('asset-title-input'); 
-  var asset_manifest2 = document.getElementById('asset-uri-input');
+  //var asset_name1 = document.getElementById('asset-title-input'); 
+  //var asset_manifest2 = document.getElementById('asset-uri-input');
 
-  asset_name1.value = asset_name;
-  asset_manifest2.value = asset_manifest;
+  //asset_name1.value = asset_name;
+  //asset_manifest2.value = asset_manifest;
 
   // Update the content list to show what items we initially have
   // stored offline.
@@ -168,11 +168,11 @@ function onCastStatusChanged(event) {
   //var downloadButton = window.window.document.getElementById('download-button');
   //downloadButton.onclick = onDownloadClick;
 
-  var asset_name1 = document.getElementById('asset-title-input'); 
+  /*var asset_name1 = document.getElementById('asset-title-input'); 
   var asset_manifest2 = document.getElementById('asset-uri-input');
 
   asset_name1.value = asset_name;
-  asset_manifest2.value = asset_manifest;
+  asset_manifest2.value = asset_manifest;*/
 
   // Update the content list to show what items we initially have
   // stored offline.
@@ -230,7 +230,7 @@ function selectTracks(tracks) {
         if (setLang == 'un'){
           return track
         }else{
-        return track.type == 'variant', track.language == setLang}})
+        return track, track.language == setLang}})
        .sort(function(a, b) { return a.bandwidth - b.bandwidth; })
       .pop();
 
@@ -260,7 +260,7 @@ function listContent() {
 
 function playContent(content) {
   window.player.load(content.offlineUri);
-  setTextTrack(textTracks, player, lang);
+  
 }
 
 function removeContent(content) {
@@ -275,6 +275,7 @@ function downloadContent(manifestUri, title) {
     'title': title,
     'downloaded': Date()
   };
+  setTextTrack(textTracks, player, lang);
   return window.storage.store(manifestUri, metadata);
 }
 
@@ -315,6 +316,8 @@ function onDownloadClick() {
       downloadButton.disabled = false;
       onError(error);
     });
+
+   
 }
 
 /*
@@ -409,7 +412,9 @@ window.document.addEventListener('DOMContentLoaded', initApp);
 
 
  function setTextTrack(textTracks, player, lang){
-  var on = true;
+  var video = window.document.getElementById('video');
+   player.configure("textDisplayFactory", new shaka.text.SimpleTextDisplayer(video));
+  const on = true;
   var id;
   var setLang = lang.slice(0, 2).toLowerCase();
   //var json = JSON.parse(textTracks);
@@ -427,9 +432,9 @@ window.document.addEventListener('DOMContentLoaded', initApp);
   }
   //console.log(textTracks);
   console.log(textTracks[id]);
-  player.setTextTrackVisibility(on);
+  player.setTextTrackVisibility(true);
   player.selectTextLanguage(setLang);
-  player.selectTextTrack(id+1);
+  player.selectTextTrack(textTracks[id]);
   console.log(player.isTextTrackVisible());
 }
 

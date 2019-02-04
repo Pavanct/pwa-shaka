@@ -31,7 +31,7 @@
   body { 
     /* The image used */
 
-    background-image: url("bg1.jpg");
+    background-image: url("images/bg1.jpg");
   
     /* Full height */
     height: 100%; 
@@ -65,9 +65,9 @@
 
 
         <div class="container">
-          <div class="video_container row" style="margin-left: 50px">
+          <div class="video_container row">
 
-            <div class="col-md-8" style="margin-left: -250px">
+            <div class="col-md-8">
               <!--<div>
               <video style="margin-top: 70px;" id="video" width="720"  controls autoplay>
                 </video>
@@ -77,20 +77,44 @@
               <div id="videoContainer" style="max-width:40em">
                 <video autoplay id="video" style="width:100%;height:100%"></video>
               </div>
-              <h2 id="video_name" style="color: blanchedalmond; margin-left: 20px; position: relative;">Star Trek: Angel One</h2>
+              <h2 id="video_name" style="color: blanchedalmond;">Star Trek: Angel One</h2>
+
+              <div>
+                <span><progress id="progress-bar" value="0" max="100" style="width: 620px"></span>
+                <span><button id="download-button" class="btn btn-secondary btn-sm" type="button" onclick="onDownloadClick()">Download</button></span>
+    
+    
+                <div>
+                  <table class="table" id="table" style="width:640px; text-align: center; visibility: hidden; 
+                      margin-top: 50px; background-color: rgb(168, 162, 162);">
+                    <thead>
+                      <tr>
+                        <th scope="col">Sl no</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Date and TIme</th>
+                        <th scope="col">Play</th>
+                        <th scope="col">Remove</th>
+                      </tr>
+                    </thead>
+                    <tbody id="content-table">
+                    </tbody>
+                  </table>
+                </div>
+    
+              </div>
             </div>
 
-            <div class="col-md-4" style="margin-top: 50px; margin-left: 150px">
+            <div class="col-md-4">
 
               <div class="card .col-sm-3" style="width: 18rem; margin: 10px;">
-                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+                <img class="card-img-top" src="images/startrek.jpg" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title" id="title-name1">Star Trek: Angel One</h5>
                   <a href="#" class="btn btn-primary" onclick="loadvideo('title-name1')">Load Video</a>
                 </div>
               </div>
               <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
-                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+                <img class="card-img-top" src="images/sintel.jpg" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title" id="title-name2">Sintel</h5>
                   <a href="#" class="btn btn-primary" onclick="loadvideo('title-name2')">Load Video</a>
@@ -98,7 +122,7 @@
               </div>
 
               <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
-                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+                <img class="card-img-top" src="images/helio-centrism.jpg" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title" id="title-name3">Helio Centrism</h5>
                   <a href="#" class="btn btn-primary" onclick="loadvideo('title-name3')">Load Video</a>
@@ -106,7 +130,7 @@
               </div>
 
               <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
-                <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+                <img class="card-img-top" src="images/tears-of-steel.jpg" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title" id="title-name4">Tears of Steel</h5>
                   <a href="#" class="btn btn-primary" onclick="loadvideo('title-name4')">Load Video</a>
@@ -116,46 +140,14 @@
             </div>
           </div>
 
-          <div style="color: black; margin-top: 50px">
+          <div style="color: black;">
             <div style="background-color: #89909173; color: white; width: fit-content;  visibility: hidden">
 
               <div id='online-signal' style='text-align:center'></div>
-              <div style="color: indianred">
-                <div style="background-color: white; ">
-                  <span style="width:120px;display:inline-block">Asset Name</span>
-                  <input id="asset-title-input" type="text" style="width:500px; background-color: #89909173;" value="Star Trek: Angel One">
-                </div>
-                <div style="background-color: #89909173; color: white;width: fit-content; visibility: hidden">
-                  <span style="width:120px;display:inline-block">Asset Manifest</span>
-                  <input id="asset-uri-input" type="text" style="width:800px; background-color: #89909173; " value="//storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd">
-                </div>
-              </div>
 
             </div>
           </div>
-          <div style=" margin-left: -165px">
-            <span><progress id="progress-bar" value="0" max="100" style="width: 620px"></span>
-            <span><button id="download-button" class="btn btn-secondary btn-sm" type="button" onclick="onDownloadClick()">Download</button></span>
-
-
-            <div style="margin-left: -560px;">
-              <table class="table" id="table" style="width:640px; text-align: center; visibility: hidden; margin-left: 595px;
-                  margin-top: 50px; background-color: rgb(168, 162, 162);">
-                <thead>
-                  <tr>
-                    <th scope="col">Sl no</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Date and TIme</th>
-                    <th scope="col">Play</th>
-                    <th scope="col">Remove</th>
-                  </tr>
-                </thead>
-                <tbody id="content-table">
-                </tbody>
-              </table>
-            </div>
-
-          </div>
+          
         </div>
       </div>
     </div>
