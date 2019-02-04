@@ -5,7 +5,9 @@ var url2 = 'https://storage.googleapis.com/shaka-demo-assets/sintel/dash.mpd';
 var url3 = 'https://storage.googleapis.com/shaka-demo-assets/heliocentrism/heliocentrism.mpd';
 var url4 = 'https://storage.googleapis.com/shaka-demo-assets/tos-ttml/dash.mpd';
 
-
+var lang;
+var textTracks;
+var player;
 
 function initApp() {
   // Install built-in polyfills to patch browser incompatibilities.
@@ -63,27 +65,28 @@ function loadvideo(videoId){
     console.log(manifestUri);
 
   }
+  
   player.load(manifestUri).then(function() {
     // This runs if the asynchronous load is successful.
    
-    texTracks = player.getTextTracks();
-    console.log("text tracks 11111");
-    //console.log(JSON.stringify(texTracks[1]));
-    var subtitles = document.getElementById("subtitle");
+    textTracks = player.getTextTracks();
+   // console.log("text tracks 11111");
+    console.log(textTracks);
     //subtitles.src = texTracks[1];
     console.log('The video has now been loaded!');
-    setTextTrack(texTracks, player);
+    
 
   }).catch(onError); 
   //texTracks = console.log(player.getTextTracks());
   //Player = player;
   //console.log(textTracks);
- /* player.configure(
-    "textDisplayFactory", new shaka.text.SimpleTextDisplayer(video));
-  initStorage(player); */
-  
-  var downloadButton = window.window.document.getElementById('download-button');
-  downloadButton.onclick = onDownloadClick;
+  /** player.configure(
+    "textDisplayFactory", new shaka.text.SimpleTextDisplayer(video));*/
+  //initStorage(player); 
+  //initStorage(player);
+
+  //var downloadButton = window.window.document.getElementById('download-button');
+  //downloadButton.onclick = onDownloadClick;
 
   var asset_name1 = document.getElementById('asset-title-input'); 
   var asset_manifest2 = document.getElementById('asset-uri-input');
@@ -100,8 +103,40 @@ function loadvideo(videoId){
 
 function initPlayer() {
   // Create a Player instance.
+
   var video = window.document.getElementById('video');
+  const videoContainer = document.getElementById('videoContainer');
   var player = new shaka.Player(video);
+
+   // Use this to pass in desired config values.  Config values not passed in
+  // will be filled out according to the default config.
+  // See more info on the configuration in the section below.
+  const uiConfig = {};
+  const ui = new shaka.ui.Overlay(player, videoContainer, video, uiConfig);
+  const controls = ui.getControls();
+
+  // Listen for error events.
+  player.addEventListener('error', onPlayerErrorEvent);
+  controls.addEventListener('error', onUIErrorEvent);
+  controls.addEventListener('caststatuschanged', onCastStatusChanged);
+  
+  
+function onPlayerErrorEvent(errorEvent) {
+  // Extract the shaka.util.Error object from the event.
+  onPlayerError(event.detail);
+}
+
+function onPlayerError(error) {
+  // Handle player error
+}
+
+function onUIErrorEvent(errorEvent) {
+  // Handle UI error
+}
+
+function onCastStatusChanged(event) {
+  // Handle cast status change
+}
 
   player.configure("textDisplayFactory", new shaka.text.SimpleTextDisplayer(video));
   
@@ -118,14 +153,20 @@ function initPlayer() {
   player.addEventListener('error', onErrorEvent);
   console.log(manifestUri);
   player.load(manifestUri).then(function() {
+    /*textTracks = player.getTextTracks();
+    setTextTrack(textTracks, player);*/
     // This runs if the asynchronous load is successful.
+    textTracks = player.getTextTracks();
+   // console.log("text tracks 11111");
+    console.log(textTracks);
     console.log('The video has now been loaded!');
+   
   }).catch(onError);  // onError is executed if the asynchronous load fails.
 
   initStorage(player);
 
-  var downloadButton = window.window.document.getElementById('download-button');
-  downloadButton.onclick = onDownloadClick;
+  //var downloadButton = window.window.document.getElementById('download-button');
+  //downloadButton.onclick = onDownloadClick;
 
   var asset_name1 = document.getElementById('asset-title-input'); 
   var asset_manifest2 = document.getElementById('asset-uri-input');
@@ -181,11 +222,23 @@ function onError(error) {
 function selectTracks(tracks) {
   // Store the highest bandwidth variant.
   var found = tracks
-      .filter(function(track) { return track.type == 'variant'; })
-      .sort(function(a, b) { return a.bandwidth - b.bandwidth; })
+      .filter(function(track) {
+        //console.log(lang.slice(0, 2));
+        //console.log(track);
+        var setLang = lang.slice(0, 2).toLowerCase();
+        console.log(setLang);
+        if (setLang == 'un'){
+          return track
+        }else{
+        return track.type == 'variant', track.language == setLang}})
+       .sort(function(a, b) { return a.bandwidth - b.bandwidth; })
       .pop();
-  console.log('Offline Track bandwidth: ' + found.bandwidth);
-  return [ found ];
+
+  //console.log('Offline Track bandwidth: ' + found.bandwidth);
+  //console.log(found);
+  //var found = [found1, found2];      
+  return [found];
+
 }
 
 function initStorage(player) {
@@ -193,10 +246,12 @@ function initStorage(player) {
   // callbacks. Set the progress callback so that we visualize
   // download progress and override the track selection callback.
   window.storage = new shaka.offline.Storage(player);
+  
   window.storage.configure({
-    progressCallback: setDownloadProgress,
-    trackSelectionCallback: selectTracks
+   progressCallback: setDownloadProgress,
+  trackSelectionCallback: selectTracks
   });
+  
 }
 
 function listContent() {
@@ -205,6 +260,7 @@ function listContent() {
 
 function playContent(content) {
   window.player.load(content.offlineUri);
+  setTextTrack(textTracks, player, lang);
 }
 
 function removeContent(content) {
@@ -219,7 +275,6 @@ function downloadContent(manifestUri, title) {
     'title': title,
     'downloaded': Date()
   };
-
   return window.storage.store(manifestUri, metadata);
 }
 
@@ -231,9 +286,13 @@ function downloadContent(manifestUri, title) {
  */
 function onDownloadClick() {
   var downloadButton = window.document.getElementById('download-button');
-  var manifestUri = window.document.getElementById('asset-uri-input').value;
-  var title = window.document.getElementById('asset-title-input').value;
+  //var manifestUri = window.document.getElementById('asset-uri-input').value;
+  var title = window.document.getElementById('video_name').innerHTML;
 
+  var langElements = document.getElementsByClassName('shaka-current-selection-span');
+  lang = langElements[2].innerHTML;
+  console.log(lang);
+  
   // Disable the download button to prevent user from requesting
   // another download until this download is complete.
   downloadButton.disabled = true;
@@ -349,13 +408,29 @@ function createButton(text, action) {
 window.document.addEventListener('DOMContentLoaded', initApp);
 
 
-function setTextTrack(textTracks, player){
+ function setTextTrack(textTracks, player, lang){
   var on = true;
-  console.log(textTracks);
-  console.log(textTracks[1]);
+  var id;
+  var setLang = lang.slice(0, 2).toLowerCase();
+  //var json = JSON.parse(textTracks);
+  //var size = Object.keys(textTracks).length;
+  //var [ textjson ] = textTracks;
+  var size = Object.keys(textTracks).length;
+  console.log(size);
+  for(var i=0; i < size; i++){
+    console.log(i);
+    var textLanguage = textTracks[i].language;
+    console.log(textLanguage);
+    if( textLanguage == setLang){
+      id = i;
+    }
+  }
+  //console.log(textTracks);
+  console.log(textTracks[id]);
   player.setTextTrackVisibility(on);
- // player.selectTextLanguage("en");
-  player.selectTextTrack(textTracks[1]);
+  player.selectTextLanguage(setLang);
+  player.selectTextTrack(id+1);
   console.log(player.isTextTrackVisible());
-  
 }
+
+

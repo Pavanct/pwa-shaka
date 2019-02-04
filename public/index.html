@@ -8,9 +8,12 @@
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
-
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- Shaka Player ui compiled library: -->
+  <script src="shaka-player.ui.js"></script>
+  <link rel="stylesheet" type="text/css" href="controls.css">
   <!-- Shaka Player compiled library: -->
-  <script src="shaka-player.compiled.js"></script>
+  <!--<script src="shaka-player.compiled.js"></script>-->
   <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/2.4.6/shaka-player.compiled.js"></script>-->
   <!-- Your application source: -->
   <script src="myapp.js"></script>
@@ -65,10 +68,18 @@
           <div class="video_container row" style="margin-left: 50px">
 
             <div class="col-md-8" style="margin-left: -250px">
-              <video style="margin-top: 70px;" id="video" width="720" controls autoplay>
-                <track id="subtitle" default kind="captions" srclang="en" src="" /></video>
-              <h2 id="video_name" style="color: blanchedalmond; margin-left: 20px">Star Trek: Angel One</h2>
+              <!--<div>
+              <video style="margin-top: 70px;" id="video" width="720"  controls autoplay>
+                </video>
+                <button id="captionButton" class="material-icons" style="color: white; display: inherit;">CC</button>
+              </div> 
+              -->
+              <div id="videoContainer" style="max-width:40em">
+                <video autoplay id="video" style="width:100%;height:100%"></video>
+              </div>
+              <h2 id="video_name" style="color: blanchedalmond; margin-left: 20px; position: relative;">Star Trek: Angel One</h2>
             </div>
+
             <div class="col-md-4" style="margin-top: 50px; margin-left: 150px">
 
               <div class="card .col-sm-3" style="width: 18rem; margin: 10px;">
@@ -119,40 +130,38 @@
                   <input id="asset-uri-input" type="text" style="width:800px; background-color: #89909173; " value="//storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd">
                 </div>
               </div>
-              <div style="margin-top: -100px; margin-left: -165px">
-                <span><progress id="progress-bar" value="0" max="100" style="width: 620px"></span>
-                <span><button id="download-button" class="btn btn-secondary btn-sm" type="button">Download</button></span>
-              </div>
+
             </div>
           </div>
+          <div style=" margin-left: -165px">
+            <span><progress id="progress-bar" value="0" max="100" style="width: 620px"></span>
+            <span><button id="download-button" class="btn btn-secondary btn-sm" type="button" onclick="onDownloadClick()">Download</button></span>
 
 
+            <div style="margin-left: -560px;">
+              <table class="table" id="table" style="width:640px; text-align: center; visibility: hidden; margin-left: 595px;
+                  margin-top: 50px; background-color: rgb(168, 162, 162);">
+                <thead>
+                  <tr>
+                    <th scope="col">Sl no</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Date and TIme</th>
+                    <th scope="col">Play</th>
+                    <th scope="col">Remove</th>
+                  </tr>
+                </thead>
+                <tbody id="content-table">
+                </tbody>
+              </table>
+            </div>
 
-
-
-
-          <table class="table" id="table" style="width:640px; text-align: center; visibility: hidden; margin-left: 595px;
-      margin-top: 50px; background-color: rgb(168, 162, 162);">
-            <thead>
-              <tr>
-                <th scope="col">Sl no</th>
-                <th scope="col">Title</th>
-                <th scope="col">Date and TIme</th>
-                <th scope="col">Play</th>
-                <th scope="col">Remove</th>
-              </tr>
-            </thead>
-            <tbody id="content-table">
-            </tbody>
-          </table>
-
-
+          </div>
         </div>
       </div>
     </div>
 
   </div>
-  
+
 </body>
 
 
