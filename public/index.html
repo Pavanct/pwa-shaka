@@ -9,6 +9,24 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- Icons and manifest -->
+  <link rel="apple-touch-icon" sizes="57x57" href="images/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="images/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="images/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="images/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="images/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="images/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="images/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="images/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="images/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/icons/favicon-16x16.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
   <!-- Shaka Player ui compiled library: -->
   <script src="shaka-player.ui.js"></script>
   <link rel="stylesheet" type="text/css" href="controls.css">
@@ -75,15 +93,15 @@
               </div> 
               -->
               <div id="videoContainer" style="max-width:40em">
-                <video autoplay id="video" style="width:100%;height:100%"></video>
+                <video autoplay id="video" style="width: 670px;height:100%"></video>
               </div>
               <h2 id="video_name" style="color: blanchedalmond;">Star Trek: Angel One</h2>
 
               <div>
-                <span><progress id="progress-bar" value="0" max="100" style="width: 620px"></span>
+                <span><progress id="progress-bar" value="0" max="100" style="width: 620px;  background-color: darkgray;"></span>
                 <span><button id="download-button" class="btn btn-secondary btn-sm" type="button" onclick="onDownloadClick()">Download</button></span>
-    
-    
+
+
                 <div>
                   <table class="table" id="table" style="width:640px; text-align: center; visibility: hidden; 
                       margin-top: 50px; background-color: rgb(168, 162, 162);">
@@ -100,20 +118,20 @@
                     </tbody>
                   </table>
                 </div>
-    
+
               </div>
             </div>
 
             <div class="col-md-4">
 
-              <div class="card .col-sm-3" style="width: 18rem; margin: 10px;">
+              <div class="card .col-sm-3" style="width: 18rem; margin: 10px; background-color: darkgray;">
                 <img class="card-img-top" src="images/startrek.jpg" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title" id="title-name1">Star Trek: Angel One</h5>
                   <a href="#" class="btn btn-primary" onclick="loadvideo('title-name1')">Load Video</a>
                 </div>
               </div>
-              <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
+              <div class="card .col-sm-3" style="width: 18rem; margin: 10px;  background-color: darkgray;">
                 <img class="card-img-top" src="images/sintel.jpg" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title" id="title-name2">Sintel</h5>
@@ -121,7 +139,7 @@
                 </div>
               </div>
 
-              <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
+              <div class="card .col-sm-3" style="width: 18rem; margin: 10px;  background-color: darkgray;">
                 <img class="card-img-top" src="images/helio-centrism.jpg" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title" id="title-name3">Helio Centrism</h5>
@@ -129,7 +147,7 @@
                 </div>
               </div>
 
-              <div class="card .col-sm-3" style="width: 18rem; margin: 10px">
+              <div class="card .col-sm-3" style="width: 18rem; margin: 10px;  background-color: darkgray;">
                 <img class="card-img-top" src="images/tears-of-steel.jpg" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title" id="title-name4">Tears of Steel</h5>
@@ -147,7 +165,7 @@
 
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>

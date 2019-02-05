@@ -230,15 +230,15 @@ function selectTracks(tracks) {
         if (setLang == 'un'){
           return track
         }else{
-        return track, track.language == setLang}})
+        return track.type == 'variant', track.language == setLang
+      }})
        .sort(function(a, b) { return a.bandwidth - b.bandwidth; })
       .pop();
-
+  
   //console.log('Offline Track bandwidth: ' + found.bandwidth);
   //console.log(found);
   //var found = [found1, found2];      
   return [found];
-
 }
 
 function initStorage(player) {
@@ -246,11 +246,13 @@ function initStorage(player) {
   // callbacks. Set the progress callback so that we visualize
   // download progress and override the track selection callback.
   window.storage = new shaka.offline.Storage(player);
-  
+  player.setTextTrackVisibility(true);
   window.storage.configure({
    progressCallback: setDownloadProgress,
   trackSelectionCallback: selectTracks
   });
+
+  player.configure("textDisplayFactory", new shaka.text.SimpleTextDisplayer(video));
   
 }
 
@@ -275,7 +277,7 @@ function downloadContent(manifestUri, title) {
     'title': title,
     'downloaded': Date()
   };
-  setTextTrack(textTracks, player, lang);
+  //setTextTrack(textTracks, player, lang);
   return window.storage.store(manifestUri, metadata);
 }
 
