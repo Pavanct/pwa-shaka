@@ -1,4 +1,4 @@
-var manifestUri = 'https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd';    
+var manifestUri = 'https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd';
 
 var url1 = 'https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd';
 var url2 = 'https://storage.googleapis.com/shaka-demo-assets/sintel/dash.mpd';
@@ -8,6 +8,7 @@ var url4 = 'https://storage.googleapis.com/shaka-demo-assets/tos-ttml/dash.mpd';
 var lang;
 var textTracks;
 var player;
+var contentVariable;
 
 function initApp() {
   // Install built-in polyfills to patch browser incompatibilities.
@@ -25,12 +26,12 @@ function initApp() {
   // Update the online status and add listeners so that we can visualize
   // our network state to the user.
   updateOnlineStatus();
-  window.addEventListener('online',  updateOnlineStatus);
+  window.addEventListener('online', updateOnlineStatus);
   window.addEventListener('offline', updateOnlineStatus);
 }
 
 
-function loadvideo(videoId){
+function loadvideo(videoId) {
   console.log(videoId);
   // load correct manifesturi to player
   //var selVideo = document.getElementById("selVideo");
@@ -38,45 +39,45 @@ function loadvideo(videoId){
   var video1 = selVideo.innerHTML;
   var title_name = document.getElementById("video_name");
 
- 
+
 
   asset_name = video1;
   asset_manifest = manifestUri;
-  
+
   console.log(video1);
-  if(video1 == "Star Trek: Angel One"){
+  if (video1 == "Star Trek: Angel One") {
     manifestUri = url1;
     console.log(video1);
     title_name.innerHTML = video1;
     console.log(manifestUri);
-  } else if(video1 == "Sintel"){
+  } else if (video1 == "Sintel") {
     manifestUri = url2;
-   title_name.innerHTML = video1;
+    title_name.innerHTML = video1;
     console.log(manifestUri);
 
-  }else if(video1 == "Helio Centrism"){
+  } else if (video1 == "Helio Centrism") {
     manifestUri = url3;
-   title_name.innerHTML = video1;
+    title_name.innerHTML = video1;
     console.log(manifestUri);
 
-  }else if(video1 == "Tears of Steel"){
+  } else if (video1 == "Tears of Steel") {
     manifestUri = url4;
     title_name.innerHTML = video1;
     console.log(manifestUri);
 
   }
-  
-  player.load(manifestUri).then(function() {
+
+  player.load(manifestUri).then(function () {
     // This runs if the asynchronous load is successful.
-   
+
     textTracks = player.getTextTracks();
-   // console.log("text tracks 11111");
+    // console.log("text tracks 11111");
     console.log(textTracks);
     //subtitles.src = texTracks[1];
     console.log('The video has now been loaded!');
-    
 
-  }).catch(onError); 
+
+  }).catch(onError);
   //texTracks = console.log(player.getTextTracks());
   //Player = player;
   //console.log(textTracks);
@@ -108,7 +109,7 @@ function initPlayer() {
   const videoContainer = document.getElementById('videoContainer');
   var player = new shaka.Player(video);
 
-   // Use this to pass in desired config values.  Config values not passed in
+  // Use this to pass in desired config values.  Config values not passed in
   // will be filled out according to the default config.
   // See more info on the configuration in the section below.
   const uiConfig = {};
@@ -119,30 +120,30 @@ function initPlayer() {
   player.addEventListener('error', onPlayerErrorEvent);
   controls.addEventListener('error', onUIErrorEvent);
   controls.addEventListener('caststatuschanged', onCastStatusChanged);
-  
-  
-function onPlayerErrorEvent(errorEvent) {
-  // Extract the shaka.util.Error object from the event.
-  onPlayerError(event.detail);
-}
 
-function onPlayerError(error) {
-  // Handle player error
-}
 
-function onUIErrorEvent(errorEvent) {
-  // Handle UI error
-}
+  function onPlayerErrorEvent(errorEvent) {
+    // Extract the shaka.util.Error object from the event.
+    onPlayerError(event.detail);
+  }
 
-function onCastStatusChanged(event) {
-  // Handle cast status change
-}
+  function onPlayerError(error) {
+    // Handle player error
+  }
+
+  function onUIErrorEvent(errorEvent) {
+    // Handle UI error
+  }
+
+  function onCastStatusChanged(event) {
+    // Handle cast status change
+  }
 
   player.configure("textDisplayFactory", new shaka.text.SimpleTextDisplayer(video));
-  
-  
- // var estimator = new shaka.util.EWMABandwidthEstimator();
- // var source = new shaka.Player.DashVideoSource(manifestUri, null, estimator);
+
+
+  // var estimator = new shaka.util.EWMABandwidthEstimator();
+  // var source = new shaka.Player.DashVideoSource(manifestUri, null, estimator);
 
 
   // Attach player and storage to the window to make it easy to access
@@ -152,16 +153,16 @@ function onCastStatusChanged(event) {
   // Listen for error events.
   player.addEventListener('error', onErrorEvent);
   console.log(manifestUri);
-  player.load(manifestUri).then(function() {
+  player.load(manifestUri).then(function () {
     /*textTracks = player.getTextTracks();
     setTextTrack(textTracks, player);*/
     // This runs if the asynchronous load is successful.
     textTracks = player.getTextTracks();
-   // console.log("text tracks 11111");
+    // console.log("text tracks 11111");
     console.log(textTracks);
     console.log('The video has now been loaded!');
-   
-  }).catch(onError);  // onError is executed if the asynchronous load fails.
+
+  }).catch(onError); // onError is executed if the asynchronous load fails.
 
   initStorage(player);
 
@@ -222,19 +223,22 @@ function onError(error) {
 function selectTracks(tracks) {
   // Store the highest bandwidth variant.
   var found = tracks
-      .filter(function(track) {
-        //console.log(lang.slice(0, 2));
-        //console.log(track);
-        var setLang = lang.slice(0, 2).toLowerCase();
-        console.log(setLang);
-        if (setLang == 'un'){
-          return track
-        }else{
+    .filter(function (track) {
+      //console.log(lang.slice(0, 2));
+      //console.log(track);
+      var setLang = lang.slice(0, 2).toLowerCase();
+      console.log(setLang);
+      if (setLang == 'un') {
+        return track
+      } else {
         return track.type == 'variant', track.language == setLang
-      }})
-       .sort(function(a, b) { return a.bandwidth - b.bandwidth; })
-      .pop();
-  
+      }
+    })
+    .sort(function (a, b) {
+      return a.bandwidth - b.bandwidth;
+    })
+    .pop();
+
   //console.log('Offline Track bandwidth: ' + found.bandwidth);
   //console.log(found);
   //var found = [found1, found2];      
@@ -248,12 +252,12 @@ function initStorage(player) {
   window.storage = new shaka.offline.Storage(player);
   player.setTextTrackVisibility(true);
   window.storage.configure({
-   progressCallback: setDownloadProgress,
-  trackSelectionCallback: selectTracks
+    progressCallback: setDownloadProgress,
+    trackSelectionCallback: selectTracks
   });
 
   player.configure("textDisplayFactory", new shaka.text.SimpleTextDisplayer(video));
-  
+
 }
 
 function listContent() {
@@ -262,7 +266,7 @@ function listContent() {
 
 function playContent(content) {
   window.player.load(content.offlineUri);
-  
+  console.log(contentVariable.appMetadata);
 }
 
 function removeContent(content) {
@@ -295,7 +299,7 @@ function onDownloadClick() {
   var langElements = document.getElementsByClassName('shaka-current-selection-span');
   lang = langElements[2].innerHTML;
   console.log(lang);
-  
+
   // Disable the download button to prevent user from requesting
   // another download until this download is complete.
   downloadButton.disabled = true;
@@ -305,21 +309,21 @@ function onDownloadClick() {
   // Download the content and then re-enable the download button so
   // that more content can be downloaded.
   downloadContent(manifestUri, title)
-    .then(function() {
+    .then(function () {
       return refreshContentList();
     })
-    .then(function(content) {
+    .then(function (content) {
       setDownloadProgress(null, 1);
       downloadButton.disabled = false;
     })
-    .catch(function(error) {
+    .catch(function (error) {
       // In the case of an error, re-enable the download button so
       // that the user can try to download another item.
       downloadButton.disabled = false;
       onError(error);
     });
 
-   
+
 }
 
 /*
@@ -359,8 +363,8 @@ function refreshContentList() {
     contentTable.deleteRow(0);
   }
 
-  var addRow = function(content) {
-    
+  var addRow = function (content) {
+
     window.document.getElementById('table').style.visibility = "visible";
     /*if (contentTable.rows.length == 0) {
       window.document.getElementById('table').style.visibility = "hidden";
@@ -368,35 +372,50 @@ function refreshContentList() {
     var append = -1;
     var serialNumber;
     var row = contentTable.insertRow(append);
+    contentVariable = content;
     //row.insertCell(append).innerHTML = content.offlineUri;
     serialNumber = contentTable.rows.length;
     row.insertCell(append).innerHTML = serialNumber;
     Object.keys(content.appMetadata)
-        .map(function(key) {
-          return content.appMetadata[key];
-        })
-        .forEach(function(value) {
-          row.insertCell(append).innerHTML = value;
-        });
+      .map(function (key) {
+        return content.appMetadata[key];
+      })
+      .forEach(function (value) {
+        row.insertCell(append).innerHTML = value.replace("GMT+0100 (Central European Standard Time)"," ");
+      });
+    
+    row.insertCell(append).appendChild(createButton(
+      'PLAY',
+      function () {
+        playContent(content);
+        //var columnElements = window.document.getElementsByTagName('td');
+        /* for(i in columnElements){
+            if(columnElements[i].innerHTML.includes("Time")){
+                console.log(columnElements[i]);
+            }
+        }*/
+      }));
 
     row.insertCell(append).appendChild(createButton(
-        'PLAY',
-        function() { playContent(content); }));
+      'REMOVE',
+      function () {
+        removeContent(content)
+          .then(function () {
+            refreshContentList();
+            if (contentTable.rows.length == 0) {
+              window.document.getElementById('table').style.visibility = "hidden";
+            }
 
-    row.insertCell(append).appendChild(createButton(
-        'REMOVE',
-        function() {
-          removeContent(content)
-              .then(function() { refreshContentList();
-                if (contentTable.rows.length == 0) {
-      window.document.getElementById('table').style.visibility = "hidden";
-    }
-               });
-        }));
+          });
+      }
+    ));
+
   };
 
   return listContent()
-      .then(function(content) { content.forEach(addRow); });
+    .then(function (content) {
+      content.forEach(addRow);
+    });
 };
 
 /*
@@ -413,9 +432,9 @@ function createButton(text, action) {
 window.document.addEventListener('DOMContentLoaded', initApp);
 
 
- function setTextTrack(textTracks, player, lang){
+function setTextTrack(textTracks, player, lang) {
   var video = window.document.getElementById('video');
-   player.configure("textDisplayFactory", new shaka.text.SimpleTextDisplayer(video));
+  player.configure("textDisplayFactory", new shaka.text.SimpleTextDisplayer(video));
   const on = true;
   var id;
   var setLang = lang.slice(0, 2).toLowerCase();
@@ -424,11 +443,11 @@ window.document.addEventListener('DOMContentLoaded', initApp);
   //var [ textjson ] = textTracks;
   var size = Object.keys(textTracks).length;
   console.log(size);
-  for(var i=0; i < size; i++){
+  for (var i = 0; i < size; i++) {
     console.log(i);
     var textLanguage = textTracks[i].language;
     console.log(textLanguage);
-    if( textLanguage == setLang){
+    if (textLanguage == setLang) {
       id = i;
     }
   }
@@ -439,5 +458,3 @@ window.document.addEventListener('DOMContentLoaded', initApp);
   player.selectTextTrack(textTracks[id]);
   console.log(player.isTextTrackVisible());
 }
-
-
